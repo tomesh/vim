@@ -1,4 +1,3 @@
-
 " PLUGIN MANAGER ( vim-plug)
 
 call plug#begin('~/.vim/plugged')
@@ -83,11 +82,14 @@ set enc=utf-8
 set fenc=utf-8
 set termencoding=utf-8
 
-" SYNTAX
+" SYNTAX AND COLORS
+
+" chosen syntax
+colorscheme wombat256
 
 set t_Co=256
 syntax on
-" colorscheme wombat256
+
 " turn line numbers on
 set number
 " highlight matching braces
