@@ -1,4 +1,4 @@
-" PLUGIN MANAGER ( vim-plug)
+" PLUGIN MANAGER SETTIGS( vim-plug)
 
 call plug#begin('~/.vim/plugged')
 
@@ -41,6 +41,11 @@ Plug 'tpope/vim-surround'
 
 Plug 'scrooloose/nerdtree'
 
+" TABS
+
+Plug 'jistr/vim-nerdtree-tabs'
+
+
 " COMMENTS
 
 Plug 'scrooloose/nerdtree'
@@ -59,6 +64,10 @@ Plug 'scrooloose/syntastic'
 
 Plug 'Valloric/YouCompleteMe'
 
+"Plug 'Shougo/neocomplcache.vim'
+
+"Plug 'rip-rip/clang_complete'
+
 
 " HASKELL
 
@@ -66,6 +75,19 @@ Plug 'Valloric/YouCompleteMe'
 " Plug 'agletmt/neco-ghc' " problem with getting password github
 
 Plug 'eagletmt/ghcmod-vim'
+
+
+" C/C++
+
+Plug 'vim-scripts/c.vim'
+
+
+" Add plugins to &runtimepath
+call plug#end()
+
+" END OF PLUGIN SETTINGS
+
+
 
 " NERDTREE
 
@@ -81,14 +103,6 @@ autocmd VimEnter * wincmd p
 " tagbar toggle with F8
 nmap <F8> :TagbarToggle<CR>
 
-
-" C/C++
-
-Plug 'vim-scripts/c.vim'
-
-
-" Add plugins to &runtimepath
-call plug#end()
 
 " AUTOCOMPLETITION SETTINGS
 
@@ -111,6 +125,7 @@ set autoindent
 set smartindent
 
 " SET ENCODING
+
 set enc=utf-8
 set fenc=utf-8
 set termencoding=utf-8
@@ -118,7 +133,9 @@ set termencoding=utf-8
 " SYNTAX AND COLORS
 
 " chosen syntax
-colorscheme wombat256
+colorscheme gruvbox
+
+set background=dark
 
 set t_Co=256
 syntax on
