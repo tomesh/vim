@@ -14,6 +14,7 @@ Plug 'tpope/vim-fireplace'
 
 Plug 'flazz/vim-colorschemes'
 
+
 " POWERLINE AIRLINE STATUS BAR
 
 Plug 'vim-airline/vim-airline'
@@ -23,10 +24,30 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'scrooloose/nerdcommenter'
 
+" GIT SUPPORT
+
+Plug 'tpope/vim-fugitive'
+
+" DISPALY TAGS
+
+Plug 'majutsushi/tagbar'
+
+" SURROUND
+
+Plug 'tpope/vim-surround'
+
 
 " TREE VIEW
 
 Plug 'scrooloose/nerdtree'
+
+" COMMENTS
+
+Plug 'scrooloose/nerdtree'
+
+" FINDER
+
+Plug 'ctrlpvim/ctrlp.vim'
 
 
 " SYNTAX CHECKING
@@ -46,7 +67,19 @@ Plug 'Valloric/YouCompleteMe'
 
 Plug 'eagletmt/ghcmod-vim'
 
+" NERDTREE
 
+" autostart and put cursot in working window
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+
+" autoopen nerdtree in every tab
+ exec "nnoremap <silent> <buffer> ". g:NERDTreeMapOpenInTab ." :call <SID>openInNewTab(0)<cr>:NERDTree<cr>"
+
+" TAGBAR
+
+" tagbar toggle with F8
+nmap <F8> :TagbarToggle<CR>
 
 
 " C/C++
