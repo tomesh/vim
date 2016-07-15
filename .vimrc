@@ -64,6 +64,11 @@ Plug 'scrooloose/syntastic'
 
 Plug 'Valloric/YouCompleteMe'
 
+" YCM generator
+
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
+
 "Plug 'Shougo/neocomplcache.vim'
 
 "Plug 'rip-rip/clang_complete'
@@ -80,6 +85,9 @@ Plug 'eagletmt/ghcmod-vim'
 " C/C++
 
 Plug 'vim-scripts/c.vim'
+
+" C/C++ syntax highlight
+Plug 'jeaye/color_coded'
 
 
 " Add plugins to &runtimepath
@@ -98,6 +106,13 @@ autocmd VimEnter * wincmd p
 " autoopen nerdtree in every tab
  exec "nnoremap <silent> <buffer> ". g:NERDTreeMapOpenInTab ." :call <SID>openInNewTab(0)<cr>:NERDTree<cr>"
 
+" tabs
+
+map  <C-l> :tabn<CR>
+map  <C-h> :tabp<CR>
+map  <C-n> :tabnew<CR>
+
+
 " TAGBAR
 
 " tagbar toggle with F8
@@ -108,6 +123,8 @@ nmap <F8> :TagbarToggle<CR>
 
 " enable Haskell
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
+
+let g:ycm_confirm_extra_conf = 0
 
 
 " SET INTENDATION
@@ -130,7 +147,12 @@ set enc=utf-8
 set fenc=utf-8
 set termencoding=utf-8
 
-" SYNTAX AND COLORS
+" SYNTAX, COLORS AND FONTS
+
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+" font size
+set guifont=Monospace\ 14
 
 " chosen syntax
 colorscheme gruvbox
@@ -146,6 +168,10 @@ set number
 set showmatch
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
+
+" Show spaces used for indenting (so you use only tabs for indenting).
+:set list
+:set listchars=tab:\|\<Space>
 
 
 " COLUMN SETTINGS
