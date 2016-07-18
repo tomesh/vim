@@ -62,6 +62,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'scrooloose/syntastic'
 
+" LINUX kernel coding style
+
+Plug 'vivien/vim-linux-coding-style'
+
 
 " AUTOCOMPLETITION
 
@@ -82,7 +86,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 " Autocompletition
 " Plug 'agletmt/neco-ghc' " problem with getting password github
 
-Plug 'eagletmt/ghcmod-vim'
+" Plug 'eagletmt/ghcmod-vim'
 
 
 " C/C++
@@ -173,9 +177,25 @@ set showmatch
 set comments=sl:/*,mb:\ *,elx:\ */
 
 " Show spaces used for indenting (so you use only tabs for indenting).
-"set list
-"set listchars=tab:\|\<Space>
+set list
+set listchars=tab:..
 
+" Highlight trailing spaces
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+" VIM MISC SETINGS
+
+" avoid ESC
+imap jj <Esc>
+
+" more ergonomic normal mode handling
+nmap ; :
 
 " COLUMN SETTINGS
 
