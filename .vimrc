@@ -1,3 +1,6 @@
+" VIM settings for Linux kernel development
+" Author: Martin Tomes
+
 " PLUGIN MANAGER SETTIGS( vim-plug)
 
 call plug#begin('~/.vim/plugged')
@@ -28,7 +31,7 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'tpope/vim-fugitive'
 
-" DISPALY TAGS
+" DISPALY TAGBAR
 
 Plug 'majutsushi/tagbar'
 
@@ -87,7 +90,7 @@ Plug 'eagletmt/ghcmod-vim'
 Plug 'vim-scripts/c.vim'
 
 " C/C++ syntax highlight
-Plug 'jeaye/color_coded'
+" Plug 'jeaye/color_coded' "problems with compiling (lua)
 
 
 " Add plugins to &runtimepath
@@ -104,7 +107,7 @@ autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 
 " autoopen nerdtree in every tab
- exec "nnoremap <silent> <buffer> ". g:NERDTreeMapOpenInTab ." :call <SID>openInNewTab(0)<cr>:NERDTree<cr>"
+" exec "nnoremap <silent> <buffer> ". g:NERDTreeMapOpenInTab ." :call <SID>openInNewTab(0)<cr>:NERDTree<cr>"
 
 " tabs
 
@@ -129,9 +132,9 @@ let g:ycm_confirm_extra_conf = 0
 
 " SET INTENDATION
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=8
+set softtabstop=8
+set shiftwidth=8
 set noexpandtab
 
 " disable vi compatibility (emulation of old bugs)
@@ -170,24 +173,24 @@ set showmatch
 set comments=sl:/*,mb:\ *,elx:\ */
 
 " Show spaces used for indenting (so you use only tabs for indenting).
-:set list
-:set listchars=tab:\|\<Space>
+"set list
+"set listchars=tab:\|\<Space>
 
 
 " COLUMN SETTINGS
 
-set colorcolumn=110
+set colorcolumn=80
 
 " highlight the last column
 highlight ColorColumn ctermbg=darkgray
 
 " POWERLINE
 
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-set laststatus=2
-set t_Co=256
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
+"set laststatus=2
+"set t_Co=256
 
 "FILETYPE DETECTION
 
