@@ -1,4 +1,4 @@
-" VIM settings for Linux kernel development
+" VIM settings customized for Linux kernel development
 " Author: Martin Tomes
 
 " PLUGIN MANAGER SETTIGS( vim-plug)
