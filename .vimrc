@@ -21,6 +21,7 @@ Plug 'flazz/vim-colorschemes'
 " POWERLINE AIRLINE STATUS BAR
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 
 " COMMENTS
@@ -69,10 +70,10 @@ Plug 'vivien/vim-linux-coding-style'
 
 " AUTOCOMPLETITION
 
-Plug 'vim-scripts/AutoComplPop'
+" Plug 'vim-scripts/AutoComplPop'
 
 
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 
 " YCM generator
 
@@ -99,6 +100,12 @@ Plug 'vim-scripts/c.vim'
 " C/C++ syntax highlight
 " Plug 'jeaye/color_coded' "problems with compiling (lua)
 
+" MOVING
+Plug 'matze/vim-move'
+
+" COPY PASTE
+Plug 'NLKNguyen/copy-cut-paste.vim'
+
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -109,7 +116,7 @@ call plug#end()
 " VIM MISC SETINGS
 
 " avoid ESC
-imap jj <Esc>
+imap kk <Esc>
 
 
 " NERDTREE
@@ -117,6 +124,12 @@ imap jj <Esc>
 " autostart and put cursot in working window
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
+
+" toggle 
+nmap <F5> :NERDTreeToggle<CR>
+
+" size
+let g:NERDTreeWinSize=40
 
 " autoopen nerdtree in every tab
 " exec "nnoremap <silent> <buffer> ". g:NERDTreeMapOpenInTab ." :call <SID>openInNewTab(0)<cr>:NERDTree<cr>"
@@ -134,75 +147,10 @@ map  <C-n> :tabnew<CR>
 nmap <F8> :TagbarToggle<CR>
 
 
-" AUTOCOMPLETITION SETTINGS
-
-
-" OmniCppCompletion plugin
-
-" Enable OmniCompletion
-" http://vim.wikia.com/wiki/Omni_completion
-
-filetype plugin on
-
-set omnifunc=syntaxcomplete#Complete
-
-" Configure menu behavior
-" http://vim.wikia.com/wiki/VimTip1386
-
-set completeopt=longest,menuone
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-" automatically open and close the popup menu / preview window
-
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
-
-" Use Ctrl+Space for omni-completion
-" http://stackoverflow.com/questions/510503/ctrlspace-for-omni-and-keyword-completion-in-vim
-
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-  \ "\<lt>C-n>" :
-  \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-  \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-  \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
-
-" Popup menu hightLight Group
-highlight Pmenu ctermbg=13 guibg=LightGray
-highlight PmenuSel ctermbg=7 guibg=DarkBlue guifg=White
-highlight PmenuSbar ctermbg=7 guibg=DarkGray
-highlight PmenuThumb guibg=Black
-
-" enable global scope search
-let OmniCpp_GlobalScopeSearch = 1
-
-" show function parameters
-let OmniCpp_ShowPrototypeInAbbr = 1
-
-" show access information in pop-up menu
-let OmniCpp_ShowAccess = 1
-
-" auto complete after '.'
-let OmniCpp_MayCompleteDot = 1
-
-" auto complete after '->'
-let OmniCpp_MayCompleteArrow = 1
-
-" auto complete after '::'
-let OmniCpp_MayCompleteScope = 0
-
-" don't select first item in pop-up menu
-let OmniCpp_SelectFirstItem = 0
-
-
 " SET INTENDATION
 
+set autoindent
 set tabstop=8
-set softtabstop=8
 set shiftwidth=8
 set noexpandtab
 
@@ -221,13 +169,26 @@ set termencoding=utf-8
 
 " SYNTAX, COLORS AND FONTS
 
+" chosen syntax color
+colorscheme solarized
+
+" go to end/begin of line in insert mode
+imap <C-]> <Esc>$a
+
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+" airline color
+let g:airline_theme='solarized'
+
+" syntax colors
+" C/C++
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
 
 " font size
 set guifont=Monospace\ 16
 
-" chosen syntax color
-colorscheme gruvbox
 
 set background=dark
 
@@ -241,9 +202,6 @@ set showmatch
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
 
-" Show spaces used for indenting (so you use only tabs for indenting).
-set list
-set listchars=tab:..
 
 " Highlight trailing spaces
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
@@ -255,8 +213,16 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-" more ergonomic normal mode handling
+
+" Automatically :write before running commands
+set autowrite     
+
+" more ergonomic normal/visual mode handling
 nmap ; :
+vmap ; :
+
+" use selecting whole lines only
+nmap v V
 
 " COLUMN SETTINGS
 
@@ -265,6 +231,43 @@ set colorcolumn=80
 " highlight the last column
 highlight ColorColumn ctermbg=darkgray
 
+" set swap
+set noswapfile
+"set swapfile
+"set dir=~/tmp
+
+" go to the end of line
+inoremap <d-e> <end>
+noremap  <d-e> <end>
+
+" matching braces
+inoremap {<CR> {<CR>}<C-o>O
+
+" COPY, PASTE, SAVE, CUT, UNDO
+
+" " Copy to clipboard
+vnoremap  <c-y>  "+y
+nnoremap  <c-Y>  "+yg_
+nnoremap  <c-y>  "+y
+nnoremap  <c-yy> "+yy
+
+" " Paste from clipboard
+nnoremap <c-v> "+p
+nnoremap <c-V> "+P
+vnoremap <c-V> "+p
+vnoremap <c-v> "+P
+
+
+"Map cmd + S to save in any mode
+
+noremap <silent> <c-S>          :update<CR>
+vnoremap <silent> <c-S>         <C-C>:update<CR>
+inoremap <silent> <c-S>         <C-O>:update<CR>
+
+
+" save and close
+inoremap <c-q> <Esc> :wqa
+
 " POWERLINE
 
 "python from powerline.vim import setup as powerline_setup
@@ -272,6 +275,38 @@ highlight ColorColumn ctermbg=darkgray
 "python del powerline_setup
 "set laststatus=2
 "set t_Co=256
+
+" AUTOCOMPLETITION SETTINGS
+filetype plugin on
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+"" turn on completion in comments
+let g:ycm_complete_in_comments=1
+"" load ycm conf by default
+let g:ycm_confirm_extra_conf=0
+"" turn on tag completion
+let g:ycm_collect_identifiers_from_tags_files=1
+"" only show completion as a list instead of a sub-window
+set completeopt-=preview
+"" start completion from the first character
+let g:ycm_min_num_of_chars_for_completion=1
+"" don't cache completion items
+let g:ycm_cache_omnifunc=0
+"" complete syntax keywords
+let g:ycm_seed_identifiers_with_syntax=1
+
+
+" make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
 
 "FILETYPE DETECTION
 
